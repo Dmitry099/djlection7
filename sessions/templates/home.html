@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Угадай число{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="header">
+            <h1>Игра "Угадай число"</h1>
+        </div>
+        {% if game_exist %}
+            Введите число
+            <form action="{% url 'home' %}" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                    {{ field }}
+                {% endfor %}
+                <input type="submit" value="Проверить"/>
+            </form>
+            <br>
+            {% if more %}
+                Загаданное число больше числа {{ person_number }}
+            {% elif less %}
+                Загаданное число меньше числа {{ person_number }}
+            {% endif %}
+        {% elif winner %}
+            Вы угадали число!
+        {% else %}
+            <br>
+            Загаданное число: {{ count }}
+            <br>
+            Второй игрок будет пытаться отгадать его
+            {% if victory %}
+            <br>
+            <h2> Ваше число угадали с {{ try_count }} попытки! </h2>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

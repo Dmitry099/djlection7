@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Подписка{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="header">
+            <h1>Покупка подписки</h1>
+        </div>
+        Если хотите купить подписку,то нажмите на кнопку!
+        <form action="{% url 'subscribe' %}" method="GET">
+        <button type="submit" value="paid" name="buybutton">Купить</button>
+        </form>
+    </div>
+{% endblock %}
